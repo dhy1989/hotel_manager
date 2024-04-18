@@ -1,20 +1,26 @@
 import './login.css'
 import {Button, Form, Input} from 'antd';
-
+import {$login} from '../api/adminApi'
 export default function Login() {
-
+    const [form] = Form.useForm();
     const onFinish = (values) => {
         console.log('Success:', values);
+        $login().then(r => console.log(r))
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+    const cancelBtn=()=>{
+        form.resetFields()
+    }
 
     return (
         <div className='login'>
             <div className={'content'}>
                 <h2>酒店后台管理系统</h2>
                 <Form
+                    form={form}
                     name="basic"
                     labelCol={{
                         span: 4,
@@ -67,7 +73,7 @@ export default function Login() {
                         <Button type="primary" htmlType="submit">
                             登录
                         </Button>
-                        <Button style={{marginLeft:'10px'}}>
+                        <Button onClick={cancelBtn} style={{marginLeft:'10px'}}>
                             取消
                         </Button>
                     </Form.Item>
