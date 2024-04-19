@@ -1,7 +1,6 @@
 import axios from "axios";
-import {baseUrl} from "../config";
 const axiosInstance = axios.create({
-    baseURL: baseUrl,
+    baseURL: '',
     timeout: 20000,
     headers: { 'X-Custom-Header': 'foobar' }
 });
