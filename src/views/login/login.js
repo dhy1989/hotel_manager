@@ -1,17 +1,25 @@
 import './login.css'
 import {Button, Form, Input} from 'antd';
-import {$login} from '../api/adminApi'
+import {$login} from '../../api/adminApi'
+import MyNotification from "../../components/MyNotification";
+import {useRef} from "react";
+
 export default function Login() {
+    const childRef = useRef(null);
     const [form] = Form.useForm();
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         console.log('Success:', values);
-        $login().then(r => console.log(r))
+         let {data,status}= await $login()
+         console.log(data,status)
+        childRef.current.childMethod({type:'success',description:'你好呀'});
+
+
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
-    const cancelBtn=()=>{
+    const cancelBtn = () => {
         form.resetFields()
     }
 
@@ -73,12 +81,13 @@ export default function Login() {
                         <Button type="primary" htmlType="submit">
                             登录
                         </Button>
-                        <Button onClick={cancelBtn} style={{marginLeft:'10px'}}>
+                        <Button onClick={cancelBtn} style={{marginLeft: '10px'}}>
                             取消
                         </Button>
                     </Form.Item>
                 </Form>
             </div>
+            <MyNotification ref={childRef}/>
         </div>
     )
 }
