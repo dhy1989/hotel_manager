@@ -9,7 +9,7 @@ const MyNotification = React.forwardRef((props, ref) => {
     const childMethod = (params) => {
         if(noticeMsg.type!==params.type||noticeMsg.description!==params.description){
             api[params.type]({
-                message: 'Notification Title',
+                message: '温馨提示',
                 description: params.description,
                 onClose:()=>{
                     setNoticeMsg({type: '',description:''})

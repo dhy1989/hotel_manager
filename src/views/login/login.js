@@ -3,17 +3,21 @@ import {Button, Form, Input} from 'antd';
 import {$login} from '../../api/adminApi'
 import MyNotification from "../../components/MyNotification";
 import {useRef} from "react";
-
+import {useNavigate} from "react-router-dom";
 export default function Login() {
     const childRef = useRef(null);
     const [form] = Form.useForm();
+    let navigate = useNavigate();
     const onFinish = async (values) => {
         console.log('Success:', values);
          let {data,status}= await $login()
          console.log(data,status)
-        childRef.current.childMethod({type:'success',description:'你好呀'});
-
-
+        if(values.username==='admin'&&values.password==='123456'){
+            childRef.current.childMethod({type:'success',description:'你好呀'});
+            navigate('/layout')
+        }else{
+            childRef.current.childMethod({type:'error',description:'账号或密码错误'});
+        }
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
