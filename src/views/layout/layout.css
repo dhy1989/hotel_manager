@@ -1,0 +1,22 @@
+.layout {
+    width: 100vw;
+    height: 100vh;
+
+    .logo {
+        height: 32px;
+        margin: 16px;
+        background-color: #336699;
+        color: white;
+        font-size: 18px;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    .header {
+        padding: 5px;
+    }
+
+    .content {
+        padding: 5px;
+    }
+}
